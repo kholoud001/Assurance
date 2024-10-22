@@ -20,6 +20,8 @@
 
     <!-- Activation des fonctionnalités Spring MVC -->
     <mvc:annotation-driven/>
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+
 
     <!-- Configuration du résolveur de vues -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

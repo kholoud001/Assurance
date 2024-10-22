@@ -1,6 +1,8 @@
 package assurance.contrat.model.entities;
 
 import jakarta.persistence.*;
+//import jakarta.validation.constraints.NotEmpty;
+
 
 import java.util.List;
 
