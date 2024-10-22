@@ -36,9 +36,3 @@ build/
 
 ### Mac OS ###
 .DS_Store
-
-### PowerAMC ###
-assurance_classes.moo
-assurance_classes
-assurance_classes.boo
-assurance.bpj
