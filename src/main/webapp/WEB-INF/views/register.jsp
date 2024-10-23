@@ -15,28 +15,28 @@
 <div class="container">
     <div class="screen">
         <div class="screen__content">
-            <form class="register">
+            <form class="register" method="post" action="${pageContext.request.contextPath}/register">
                 <div class="login__field">
                     <i class="login__icon fas fa-user"></i>
-                    <input value="name" type="text" class="login__input" placeholder="User name">
+                    <input name="name" type="text" class="login__input" placeholder="User name" required>
                 </div>
                 <div class="login__field">
                     <i class="login__icon fas fa-user"></i>
-                    <input value="email" type="email" class="login__input" placeholder="Email">
+                    <input name="email" type="email" class="login__input" placeholder="Email" required>
                 </div>
                 <div class="login__field">
                     <i class="login__icon fas fa-user"></i>
-                    <input value="address" type="text" class="login__input" placeholder="Address">
+                    <input name="address" type="text" class="login__input" placeholder="Address">
                 </div>
                 <div class="login__field">
                     <i class="login__icon fas fa-user"></i>
-                    <input value="phone" type="text" class="login__input" placeholder="Phone Number">
+                    <input name="phone" type="text" class="login__input" placeholder="Phone Number">
                 </div>
                 <div class="login__field">
                     <i class="login__icon fas fa-lock"></i>
-                    <input type="password" class="login__input" placeholder="Password">
+                    <input name="password" type="password" class="login__input" placeholder="Password" required>
                 </div>
-                <button class="button login__submit">
+                <button class="button login__submit" type="submit">
                     <span class="button__text">Register Now</span>
                     <i class="button__icon fas fa-chevron-right"></i>
                 </button>
