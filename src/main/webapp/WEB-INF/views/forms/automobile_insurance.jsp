@@ -4,9 +4,16 @@
 <html>
 <head>
     <title>Automobile Insurance Form</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/styles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/style/formStyle.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/style/navbar.css">
+
+
+
 </head>
 <body>
+<%--NavBar--%>
+<jsp:include page="/resources/layouts/navbar.jsp" />
+
 <h1>Automobile Insurance Form</h1>
 
 <!-- Spring Form Tag -->

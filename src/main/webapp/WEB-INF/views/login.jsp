@@ -9,9 +9,11 @@
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/style/authStyles.css">
+
     <title>Register Page</title>
 </head>
 <body>
+<%--NavBar--%>
 <div class="container">
     <div class="screen">
         <div class="screen__content">

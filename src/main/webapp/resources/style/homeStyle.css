@@ -1,8 +1,15 @@
 body {
-    background: #7E7BB9;
+    background: linear-gradient(90deg, #C7C5F4, #776BCC);
     font-family: Arial, sans-serif; /* Adding a default font */
+    margin: 0;
+    font-size: 28px;
 }
 
+
+
+
+
+/*Cards*/
 .cards {
     display: flex;
     align-items: center; /* Center cards horizontally */

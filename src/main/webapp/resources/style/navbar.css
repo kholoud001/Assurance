@@ -1,0 +1,52 @@
+
+/* Navbar */
+#navbar {
+    position: sticky;              /* Keeps the navbar at the top of the viewport */
+    top: 0;                        /* Ensures the navbar is at the top */
+    background-color: #f1f1f1;    /* Light background color */
+    margin-bottom: 50px;           /* Space below the navbar */
+    display: flex;                 /* Use flexbox for layout */
+    align-items: center;           /* Vertically center items */
+    padding: 10px 20px;           /* Padding around the navbar */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow for depth */
+}
+
+/* Align "Home" to the left */
+#navbar .left {
+    flex: 1;                       /* Takes up all available space on the left */
+}
+
+/* Align other links to the right */
+#navbar .right {
+    display: flex;                 /* Use flexbox for right side links */
+    margin-left: auto;            /* Pushes this section to the right */
+}
+
+#navbar a {
+    color: #333;                  /* Text color */
+    text-align: center;           /* Center text in links */
+    padding: 14px 16px;           /* Padding for links */
+    text-decoration: none;         /* No underline on links */
+    font-size: 17px;              /* Font size */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+}
+
+#navbar a:hover {
+    background-color: #ddd;       /* Background color on hover */
+    color: black;                 /* Text color on hover */
+}
+
+#navbar a.active {
+    background-color: #2b2965;    /* Background color for active link */
+    color: white;                 /* Text color for active link */
+}
+
+/* Additional styles for the header */
+.header {
+    padding: 20px;
+    text-align: center;
+}
+
+.content {
+    padding: 16px;                /* Padding for content area */
+}
