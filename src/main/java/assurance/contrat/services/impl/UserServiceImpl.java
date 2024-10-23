@@ -29,4 +29,12 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
+    public User authenticate(String email, String password) {
+        User user = userRepository.findByEmail(email);
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        }
+        return null;
+    }
+
 }

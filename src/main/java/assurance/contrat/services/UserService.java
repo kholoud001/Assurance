@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface UserService {
     void saveUser(User user);
+    User authenticate(String email, String password);
 
     User getUserById(Long id);
 
