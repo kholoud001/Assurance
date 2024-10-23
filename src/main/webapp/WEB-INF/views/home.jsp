@@ -6,12 +6,61 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 <head>
-    <title>Title</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/style/homeStyle.css">
+    <title>HomePage</title>
 </head>
 <body>
-<h1> hello from home spring MVC</h1>
+<nav>
+    <ul>
+        <c:if test="${not empty sessionScope.loggedInUser}">
+            <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+        </c:if>
+        <c:if test="${empty sessionScope.loggedInUser}">
+            <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+            <li><a href="${pageContext.request.contextPath}/register">Register</a></li>
+        </c:if>
+    </ul>
+</nav>
+
+<%--cards--%>
+<div class="cards">
+<div class="d-flex justify-content-center container mt-5">
+    <a href="${pageContext.request.contextPath}/automobile/form">
+        <div class="card p-3 bg-white"><i class="fa fa-apple"></i>
+        <div class="about-product"><img src="${pageContext.request.contextPath}/resources/images/auto.png">
+            <div>
+                <h4>Automobile</h4>
+                <h5 class="mt-0 text-black-50">Insurance Quote</h5>
+            </div>
+        </div>
+    </div>
+    </a>
+</div>
+<div class="d-flex justify-content-center container mt-5">
+    <div class="card p-3 bg-white"><i class="fa fa-apple"></i>
+        <div class="about-product"><img src="${pageContext.request.contextPath}/resources/images/home1.png">
+            <div>
+                <h4>Housing</h4>
+                <h5 class="mt-0 text-black-50">Insurance Quote</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="d-flex justify-content-center container mt-5">
+    <div class="card p-3 bg-white"><i class="fa fa-apple"></i>
+        <div class="about-product"><img src="${pageContext.request.contextPath}/resources/images/health.png">
+            <div>
+                <h4>Health</h4>
+                <h5 class="mt-0 text-black-50">Insurance Quote</h5>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 
 </body>
 </html>

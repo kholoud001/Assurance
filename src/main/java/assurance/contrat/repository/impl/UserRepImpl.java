@@ -37,7 +37,7 @@ public class UserRepImpl implements UserRep {
                     .setParameter("email", email)
                     .getSingleResult();
         } catch (NoResultException e) {
-            return null; 
+            return null;
         }
     }
 

@@ -2,6 +2,7 @@ package assurance.contrat.controller;
 
 import assurance.contrat.model.entities.User;
 import assurance.contrat.services.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/login")
 public class LoginController {
 
-    private final UserService userService;
+    private  UserService userService;
 
     public LoginController(UserService userService) {
         this.userService = userService;
@@ -25,10 +26,12 @@ public class LoginController {
     }
 
     @PostMapping
-    public ModelAndView loginUser(@ModelAttribute User user) {
+    public ModelAndView loginUser(@ModelAttribute User user, HttpSession session) {
         User authenticatedUser = userService.authenticate(user.getEmail(), user.getPassword());
 
         if (authenticatedUser != null) {
+            session.setAttribute("loggedInUser", authenticatedUser);
+
             ModelAndView modelAndView = new ModelAndView("home");
             modelAndView.addObject("user", authenticatedUser);
             return modelAndView;
@@ -38,4 +41,5 @@ public class LoginController {
             return modelAndView;
         }
     }
+
 }
