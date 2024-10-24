@@ -19,6 +19,38 @@ public class AutomobileServiceImpl implements AutomobileService {
     public void save(Automobile automobile) {
         automobileRep.save(automobile);
     }
+
+    @Override
+    public double calculPrice(Automobile automobile) {
+        double base = 500;
+        double finalAmount = base;
+
+        if (automobile.getDriverAge() < 25) {
+            finalAmount += PercentageIncrease(10, base);
+        }
+
+        if (automobile.getVehicle() != null && "Luxury".equals(automobile.getVehicle().getType())) {
+            finalAmount += PercentageIncrease(15, base);
+        }
+
+        if ("Professional".equals(automobile.getVehicleUse())) {
+            finalAmount += PercentageIncrease(10, base);
+        }
+
+        if (automobile.getDrivingHistory() != null && !automobile.getDrivingHistory().trim().isEmpty()) {
+            finalAmount += PercentageIncrease(10, base);
+        } else {
+            finalAmount -= PercentageIncrease(20, base);
+        }
+
+        System.out.println(finalAmount);
+        return finalAmount;
+    }
+
+    private double PercentageIncrease(double percentage, double price) {
+        return (percentage / 100) * price;
+    }
+
 }
 
 

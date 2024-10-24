@@ -35,8 +35,8 @@ public class HealthController {
         User user = (User) session.getAttribute("loggedInUser");
         if (user != null) {
             health.setUser(user);
-            // Change later the price
-            health.setPrice(0.0);
+            double calculatedPrice = healthService.calculPrice(health);
+            health.setPrice(calculatedPrice);
             healthService.save(health);
             return "redirect:/home";
         } else {
