@@ -11,23 +11,16 @@
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/style/homeStyle.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/style/navbar.css">
+
     <title>HomePage</title>
 </head>
 <body>
-<nav>
-    <ul>
-        <c:if test="${not empty sessionScope.loggedInUser}">
-            <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
-        </c:if>
-        <c:if test="${empty sessionScope.loggedInUser}">
-            <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
-            <li><a href="${pageContext.request.contextPath}/register">Register</a></li>
-        </c:if>
-    </ul>
-</nav>
+<%--NavBar--%>
+<jsp:include page="/resources/layouts/navbar.jsp" />
 
 <%--cards--%>
-<div class="cards">
+<div class="cards content">
 <div class="d-flex justify-content-center container mt-5">
     <a href="${pageContext.request.contextPath}/automobile/form">
         <div class="card p-3 bg-white"><i class="fa fa-apple"></i>
@@ -41,7 +34,8 @@
     </a>
 </div>
 <div class="d-flex justify-content-center container mt-5">
-    <div class="card p-3 bg-white"><i class="fa fa-apple"></i>
+    <a href="${pageContext.request.contextPath}/housing/form">
+        <div class="card p-3 bg-white"><i class="fa fa-apple"></i>
         <div class="about-product"><img src="${pageContext.request.contextPath}/resources/images/home1.png">
             <div>
                 <h4>Housing</h4>
@@ -49,9 +43,11 @@
             </div>
         </div>
     </div>
+    </a>
 </div>
 <div class="d-flex justify-content-center container mt-5">
-    <div class="card p-3 bg-white"><i class="fa fa-apple"></i>
+    <a href="${pageContext.request.contextPath}/health/form">
+        <div class="card p-3 bg-white"><i class="fa fa-apple"></i>
         <div class="about-product"><img src="${pageContext.request.contextPath}/resources/images/health.png">
             <div>
                 <h4>Health</h4>
@@ -59,6 +55,7 @@
             </div>
         </div>
     </div>
+    </a>
 </div>
 </div>
 
