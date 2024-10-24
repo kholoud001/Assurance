@@ -21,4 +21,32 @@ public class HealthServiceImpl implements HealthService {
     public void save(Health health){
         healthRep.save(health);
     }
+
+    @Override
+    public double calculPrice(Health health) {
+        double base = 150;
+        double finalAmount = base;
+
+        if (health.getAge() > 60) {
+            finalAmount += PercentageIncrease(20, base);
+        }
+
+        if ("Yes".equalsIgnoreCase(health.getHealthState())) {
+            finalAmount += PercentageIncrease(30, base);
+        }
+
+        if ("Basic".equalsIgnoreCase(health.getMedicalCoverageType())) {
+            finalAmount -= PercentageIncrease(10, base);
+        } else if ("Premium".equalsIgnoreCase(health.getMedicalCoverageType())) {
+            finalAmount += PercentageIncrease(5, base);
+        }
+
+        System.out.println(finalAmount);
+        return finalAmount;
+    }
+
+    private double PercentageIncrease(double percentage, double price) {
+        return (percentage / 100) * price;
+    }
+
 }

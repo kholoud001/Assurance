@@ -35,8 +35,9 @@ public class HousingController {
         User user = (User) session.getAttribute("loggedInUser");
         if (user != null) {
             housing.setUser(user);
-            // Change later the price
-            housing.setPrice(0.0);
+            double calculatedPrice = housingService.calculPrice(housing);
+            housing.setPrice(calculatedPrice);
+
             housingService.save(housing);
             return "redirect:/home";
         } else {

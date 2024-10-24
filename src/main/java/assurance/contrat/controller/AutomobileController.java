@@ -46,8 +46,8 @@ public class AutomobileController {
         User user = (User) session.getAttribute("loggedInUser");
         if (user != null) {
             automobile.setUser(user);
-            // Change later the price
-            automobile.setPrice(0.0);
+            double calculatedPrice = automobileService.calculPrice(automobile);
+            automobile.setPrice(calculatedPrice);
             automobileService.save(automobile);
             return "redirect:/home";
         } else {

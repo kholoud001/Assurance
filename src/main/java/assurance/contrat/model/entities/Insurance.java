@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "insurances")
-abstract class Insurance {
+public  class Insurance {
 
 
     @Id
