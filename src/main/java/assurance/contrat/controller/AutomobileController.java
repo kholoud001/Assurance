@@ -43,7 +43,6 @@ public class AutomobileController {
 
     @PostMapping("/submit")
     public String submitAutomobileForm(@ModelAttribute Automobile automobile, HttpSession session) {
-        // Retrieve the user from session
         User user = (User) session.getAttribute("loggedInUser");
         if (user != null) {
             automobile.setUser(user);

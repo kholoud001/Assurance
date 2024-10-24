@@ -32,11 +32,11 @@ public class Housing extends Insurance{
         this.securitySystem = security;
     }
 
-    public double getValue() {
+    public double getHomeValue() {
         return homeValue;
     }
 
-    public void setValue(double value) {
+    public void setHomeValue(double value) {
         this.homeValue = value;
     }
 

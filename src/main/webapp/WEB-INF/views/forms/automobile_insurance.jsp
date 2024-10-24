@@ -18,20 +18,15 @@
 
 <!-- Spring Form Tag -->
 <form:form action="${pageContext.request.contextPath}/automobile/submit" method="post" modelAttribute="automobile">
-    <!-- Insurance Price -->
-    <div class="form-group">
-        <label for="price">Insurance Price:</label>
-<%--        To change later--%>
-        <form:input path="price" type="number" step="0.01" min="0" id="price" value="0" required="true"/>
-    </div>
+
 
     <!-- Insurance Type -->
     <div class="form-group">
         <label for="type">Insurance Type:</label>
-        <form:select path="type" id="type" required="true">
-            <form:option value="" label="Select Insurance Type"/>
-            <form:options items="${insuranceTypes}" />
-        </form:select>
+        <!-- Display the type as plain text -->
+        <p>Automobile</p>
+        <!-- Hidden input to set the value to "Automobile" -->
+        <form:input path="type" id="type" type="hidden" value="Automobile"/>
     </div>
 
     <!-- Driver Age -->
@@ -53,7 +48,12 @@
     <!-- Vehicle Use -->
     <div class="form-group">
         <label for="vehicleUse">Vehicle Use:</label>
-        <form:input path="vehicleUse" type="text" id="vehicleUse" placeholder="e.g., Personal, Commercial" required="true"/>
+        <form:select path="vehicleUse" id="vehicleUse" required="true">
+            <form:option value="" label="Select Vehicle Use"/>
+            <form:option value="Personal" label="Personal"/>
+            <form:option value="Commercial" label="Commercial"/>
+            <form:option value="Professional" label="Professional"/>
+        </form:select>
     </div>
 
     <!-- Driving History -->
