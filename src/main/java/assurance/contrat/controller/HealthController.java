@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/health")
 public class HealthController {
@@ -22,6 +24,26 @@ public class HealthController {
     @Autowired
     public HealthController(HealthService healthService) {
         this.healthService = healthService;
+    }
+
+    @GetMapping("/my-insurances")
+    public String showUserHealthInsurances(Model model, HttpSession session) {
+        Long loggedInUserId = getLoggedInUserId(session);
+        if (loggedInUserId != null) {
+            List<Health> userInsurances = healthService.getHealthInsurancesForUser(loggedInUserId);
+            model.addAttribute("healthInsurances", userInsurances);
+            return "quotes/health";
+        } else {
+            return "redirect:/login";
+        }
+    }
+
+    private Long getLoggedInUserId(HttpSession session) {
+        User user = (User) session.getAttribute("loggedInUser");
+        if (user != null) {
+            return user.getId();
+        }
+        return null;
     }
 
     @GetMapping("/form")

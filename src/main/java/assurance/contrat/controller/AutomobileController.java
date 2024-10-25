@@ -9,10 +9,8 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -29,15 +27,31 @@ public class AutomobileController {
         this.automobileService= automobileService;
     }
 
+    @GetMapping("/my-insurances")
+    public String showUserAutomobileInsurances(Model model, HttpSession session) {
+        Long loggedInUserId = getLoggedInUserId(session);
+        if (loggedInUserId != null) {
+            List<Automobile> userInsurances = automobileService.getAutomobileInsurancesForUser(loggedInUserId);
+        model.addAttribute("automobileInsurances", userInsurances);
+        return "quotes/automobile";
+        } else {
+            return "redirect:/login";
+        }
+    }
+
+    private Long getLoggedInUserId(HttpSession session) {
+        User user = (User) session.getAttribute("loggedInUser");
+        if (user != null) {
+            return user.getId();
+        }
+        return null;
+    }
 
     @GetMapping("/form")
     public String showAutomobileForm(Model model) {
         model.addAttribute("automobile", new Automobile());
-
         model.addAttribute("insuranceTypes", List.of(InsuranceType.values()));
-
         model.addAttribute("vehicles", vehicleService.findAll());
-
         return "forms/automobile_insurance";
     }
 
@@ -53,6 +67,17 @@ public class AutomobileController {
         } else {
             return "redirect:/login";
         }
+    }
+
+    @PostMapping("/delete")
+    public String deleteInsurance(@RequestParam("insuranceId") Long insuranceId, RedirectAttributes redirectAttributes) {
+        try {
+            automobileService.deleteInsuranceById(insuranceId);
+            redirectAttributes.addFlashAttribute("message", "Insurance record deleted successfully.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Failed to delete the insurance record.");
+        }
+        return "redirect:/quotes/automobile";
     }
 
 }

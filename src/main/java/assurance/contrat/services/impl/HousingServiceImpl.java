@@ -7,6 +7,8 @@ import assurance.contrat.repository.HousingRep;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class HousingServiceImpl implements HousingService {
 
@@ -22,6 +24,10 @@ public class HousingServiceImpl implements HousingService {
         housingRep.save(housing);
     }
 
+    @Override
+    public List<Housing> getHousingInsurancesForUser(Long userId) {
+        return housingRep.findHousingByUserId(userId);
+    }
 
     @Override
     public double calculPrice(Housing housing) {

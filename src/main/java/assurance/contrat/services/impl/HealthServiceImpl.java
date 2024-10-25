@@ -7,6 +7,8 @@ import assurance.contrat.services.HealthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class HealthServiceImpl implements HealthService {
 
@@ -20,6 +22,11 @@ public class HealthServiceImpl implements HealthService {
     @Override
     public void save(Health health){
         healthRep.save(health);
+    }
+
+    @Override
+    public List<Health> getHealthInsurancesForUser(Long userId) {
+        return healthRep.findHealthByUserId(userId);
     }
 
     @Override
