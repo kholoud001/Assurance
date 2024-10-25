@@ -39,6 +39,13 @@ public class ContractServiceImpl implements ContractService {
         contractRep.save(contract);
     }
 
+    @Override
+    @Transactional
+    public void updateContractStatus(Contract contract) {
+        contract.setStatus(false);
+        contractRep.save(contract);
+    }
+
     @Transactional
     public void updateContract(Contract contract) {
         Contract existingContract = contractRep.findById(contract.getId());

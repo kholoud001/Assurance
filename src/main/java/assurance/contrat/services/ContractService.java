@@ -20,6 +20,9 @@ public interface ContractService {
 
     void deleteContract(Long id);
 
+    @Transactional
+    void updateContractStatus(Contract contract);
+
     void updateContract(Contract contract);
 
     List<Contract> getActiveContracts();
