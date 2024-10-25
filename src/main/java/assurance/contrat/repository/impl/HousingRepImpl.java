@@ -5,8 +5,11 @@ import assurance.contrat.model.entities.User;
 import assurance.contrat.repository.HousingRep;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Repository
 public class HousingRepImpl implements HousingRep {
@@ -20,5 +23,13 @@ public class HousingRepImpl implements HousingRep {
         User managedUser = entityManager.merge(housing.getUser());
         housing.setUser(managedUser);
         entityManager.persist(housing);
+    }
+    @Override
+    @Transactional
+    public List<Housing> findHousingByUserId(Long userId) {
+        String jpql = "SELECT h FROM Housing h WHERE h.user.id = :userId";
+        TypedQuery<Housing> query = entityManager.createQuery(jpql, Housing.class);
+        query.setParameter("userId", userId);
+        return query.getResultList();
     }
 }

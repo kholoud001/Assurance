@@ -5,8 +5,11 @@ import assurance.contrat.model.entities.User;
 import assurance.contrat.repository.HealthRep;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Repository
 public class HealthRepImpl implements HealthRep {
@@ -20,5 +23,14 @@ public class HealthRepImpl implements HealthRep {
         User managedUser = entityManager.merge(health.getUser());
         health.setUser(managedUser);
         entityManager.persist(health);
+    }
+
+    @Override
+    @Transactional
+    public List<Health> findHealthByUserId(Long userId) {
+        String jpql = "SELECT h FROM Health h WHERE h.user.id = :userId";
+        TypedQuery<Health> query = entityManager.createQuery(jpql, Health.class);
+        query.setParameter("userId", userId);
+        return query.getResultList();
     }
 }

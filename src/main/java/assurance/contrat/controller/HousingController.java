@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/housing")
 public class HousingController {
@@ -22,6 +24,26 @@ public class HousingController {
 
     public HousingController(HousingService housingService) {
         this.housingService = housingService;
+    }
+
+    @GetMapping("/my-insurances")
+    public String showUserHousingInsurances(Model model, HttpSession session) {
+        Long loggedInUserId = getLoggedInUserId(session);
+        if (loggedInUserId != null) {
+            List<Housing> userInsurances = housingService.getHousingInsurancesForUser(loggedInUserId);
+            model.addAttribute("housingInsurances", userInsurances);
+            return "quotes/housing";
+        } else {
+            return "redirect:/login";
+        }
+    }
+
+    private Long getLoggedInUserId(HttpSession session) {
+        User user = (User) session.getAttribute("loggedInUser");
+        if (user != null) {
+            return user.getId();
+        }
+        return null;
     }
 
     @GetMapping("/form")
