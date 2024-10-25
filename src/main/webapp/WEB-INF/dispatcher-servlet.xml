@@ -42,6 +42,10 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
+    <!-- Document handling -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
+
+
     <!-- Activation de la gestion des transactions par annotations -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 

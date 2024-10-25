@@ -24,6 +24,11 @@ public class AutomobileServiceImpl implements AutomobileService {
     }
 
     @Override
+    public Automobile findById(Long id){
+        return automobileRep.findById(id);
+    }
+
+    @Override
     public List<Automobile> getAutomobileInsurancesForUser(Long userId) {
         return automobileRep.findAutomobileByUserId(userId);
     }

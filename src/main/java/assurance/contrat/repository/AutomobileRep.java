@@ -8,6 +8,8 @@ import java.util.List;
 public interface AutomobileRep {
     void save(Automobile automobile);
 
+    Automobile findById(Long id);
+
     @Transactional
     List<Automobile> findAutomobileByUserId(Long userId);
 
