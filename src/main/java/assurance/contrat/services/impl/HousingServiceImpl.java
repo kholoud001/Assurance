@@ -25,6 +25,11 @@ public class HousingServiceImpl implements HousingService {
     }
 
     @Override
+    public Housing findById(Long id){
+        return housingRep.findById(id);
+    }
+
+    @Override
     public List<Housing> getHousingInsurancesForUser(Long userId) {
         return housingRep.findHousingByUserId(userId);
     }

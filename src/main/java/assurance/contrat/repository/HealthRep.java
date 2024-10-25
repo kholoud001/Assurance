@@ -9,6 +9,8 @@ public interface HealthRep {
     @Transactional
     void save(Health health);
 
+    Health findById(Long id);
+
     @Transactional
     List<Health> findHealthByUserId(Long userId);
 }

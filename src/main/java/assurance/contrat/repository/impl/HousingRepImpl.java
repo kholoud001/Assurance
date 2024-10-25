@@ -25,6 +25,12 @@ public class HousingRepImpl implements HousingRep {
         entityManager.persist(housing);
     }
     @Override
+    public Housing findById(Long id) {
+        return entityManager.find(Housing.class, id);
+    }
+
+
+    @Override
     @Transactional
     public List<Housing> findHousingByUserId(Long userId) {
         String jpql = "SELECT h FROM Housing h WHERE h.user.id = :userId";

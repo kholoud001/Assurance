@@ -9,6 +9,8 @@ public interface HousingRep {
     @Transactional
     void save(Housing housing);
 
+    Housing findById(Long id);
+
     @Transactional
     List<Housing> findHousingByUserId(Long userId);
 }

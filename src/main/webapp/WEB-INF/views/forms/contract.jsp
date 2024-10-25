@@ -18,7 +18,12 @@
 <form:form action="${pageContext.request.contextPath}/contract/submit" method="post" modelAttribute="contract" enctype="multipart/form-data">
     <!-- Include a hidden field for insuranceId -->
     <input type="hidden" name="id" value="${insuranceId}" />
+    <input type="hidden" name="insuranceType" value="${insuranceType}" />
 
+    <div class="form-group">
+        <label for="insuranceType">Insurance Type:</label>
+        <span id="insuranceType">${insuranceType}</span>
+    </div>
 
     <!-- Document Upload -->
     <div class="form-group">
