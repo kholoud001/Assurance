@@ -1,6 +1,7 @@
 package assurance.contrat.services;
 
 import assurance.contrat.model.entities.Contract;
+import assurance.contrat.model.entities.Insurance;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -10,6 +11,8 @@ public interface ContractService {
     void addContract(Contract contract);
 
     Contract getContractById(Long id);
+
+    Insurance findInsuranceById(long id);
 
     List<Contract> getAllContracts();
 

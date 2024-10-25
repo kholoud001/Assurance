@@ -1,11 +1,13 @@
 package assurance.contrat.services.impl;
 
 import assurance.contrat.model.entities.Contract;
+import assurance.contrat.model.entities.Insurance;
 import assurance.contrat.repository.AutomobileRep;
 import assurance.contrat.repository.ContractRep;
 import assurance.contrat.services.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -37,9 +39,22 @@ public class ContractServiceImpl implements ContractService {
         contractRep.save(contract);
     }
 
+    @Transactional
+    public void updateContract(Contract contract) {
+        Contract existingContract = contractRep.findById(contract.getId());
+        existingContract.setInsurance(contract.getInsurance());
+        contractRep.save(existingContract);
+    }
+
+
     @Override
     public Contract getContractById(Long id) {
         return contractRep.findById(id);
+    }
+
+    @Override
+    public Insurance findInsuranceById(long id){
+        return contractRep.findInsuranceById(id);
     }
 
     @Override
@@ -58,10 +73,10 @@ public class ContractServiceImpl implements ContractService {
         contractRep.delete(id);
     }
 
-    @Override
-    public void updateContract(Contract contract) {
-        contractRep.save(contract);
-    }
+//    @Override
+//    public void updateContract(Contract contract) {
+//        contractRep.save(contract);
+//    }
 
 
     @Override

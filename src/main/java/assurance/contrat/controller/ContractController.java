@@ -7,6 +7,7 @@ import assurance.contrat.services.ContractService;
 import assurance.contrat.services.HealthService;
 import assurance.contrat.services.HousingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -45,6 +46,20 @@ public class ContractController {
         List<Contract> activeContracts = contractService.getActiveContracts();
         model.addAttribute("contracts", activeContracts);
         return "contracts";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editContract(@PathVariable("id") Long id, Model model) {
+        Contract contract = contractService.getContractById(id);
+        System.out.println("contract Id"+contract.getId());
+        if (contract != null) {
+            model.addAttribute("contract", contract);
+            model.addAttribute("insuranceType", contract.getInsurance().getType());
+            model.addAttribute("insuranceId", contract.getInsurance().getId());
+            System.out.println("insurance id"+ contract.getInsurance().getId());
+            return "forms/edit_contract";
+        }
+        return "redirect:/contract/list";
     }
 
     @GetMapping("/automobile")
@@ -95,14 +110,12 @@ public class ContractController {
 
         System.out.println("Contract ID: " + contract.getId());
 
-        // Initialize insurance variable
         Insurance insurance = null;
 
-        // Determine insurance type and retrieve relevant insurance object
         if (insuranceType == InsuranceType.Automobile) {
             Automobile automobile = automobileService.findById(contract.getId());
             if (automobile != null) {
-                insurance = automobile; // Store automobile insurance
+                insurance = automobile;
                 System.out.println("Found Automobile Insurance: " + automobile);
             } else {
                 System.out.println("Automobile not found for ID: " + contract.getId());
@@ -110,7 +123,7 @@ public class ContractController {
         } else if (insuranceType == InsuranceType.Health) {
             Health healthInsurance = healthService.findById(contract.getId());
             if (healthInsurance != null) {
-                insurance = healthInsurance; // Store health insurance
+                insurance = healthInsurance;
                 System.out.println("Found Health Insurance: " + healthInsurance);
             } else {
                 System.out.println("Health Insurance not found for ID: " + contract.getId());
@@ -118,14 +131,13 @@ public class ContractController {
         } else if (insuranceType == InsuranceType.Housing) {
             Housing housingInsurance = housingService.findById(contract.getId());
             if (housingInsurance != null) {
-                insurance = housingInsurance; // Store housing insurance
+                insurance = housingInsurance;
                 System.out.println("Found Housing Insurance: " + housingInsurance);
             } else {
                 System.out.println("Housing Insurance not found for ID: " + contract.getId());
             }
         }
 
-        // Check if insurance was found and set on contract
         if (insurance != null) {
             contract.setInsurance(insurance);
             contract.setSubscriptionDate(LocalDate.now());
@@ -153,6 +165,58 @@ public class ContractController {
         redirectAttributes.addFlashAttribute("errorMessage", "No valid insurance found. Contract not generated.");
         return "redirect:/home";
     }
+
+
+
+    @PostMapping("/update")
+    public String updateContract(
+            @ModelAttribute("contract") Contract contract,
+            @RequestParam("insuranceId") Long insuranceId,
+            @RequestParam("document") MultipartFile document,
+            RedirectAttributes redirectAttributes) {
+
+        if (contract == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Contract cannot be null.");
+            return "redirect:/contract/list";
+        }
+
+        if (contract.getSubscriptionDate() == null) {
+            contract.setSubscriptionDate(LocalDate.now());
+        }
+        if (contract.getExpirationDate() == null) {
+            contract.setExpirationDate(LocalDate.now().plusDays(30));
+        }
+
+        contract.setStatus(true);
+
+        if (insuranceId != null) {
+            Insurance insurance = contractService.findInsuranceById(insuranceId);
+            if (insurance != null) {
+                contract.setInsurance(insurance);
+            } else {
+                redirectAttributes.addFlashAttribute("errorMessage", "Insurance not found.");
+                return "redirect:/contract/list"; 
+            }
+        }
+
+        // Handle the document upload and set its path if present
+        String documentPath = saveDocument(document);
+        if (documentPath != null) {
+            contract.setDocumentPath(documentPath);
+        }
+
+        // Call the update service to persist the changes
+        try {
+            contractService.updateContract(contract);
+            redirectAttributes.addFlashAttribute("successMessage", "Contract updated successfully.");
+        } catch (DataIntegrityViolationException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Error updating contract: " + e.getMessage());
+        }
+
+        return "redirect:/contract/list";
+    }
+
+
 
 
     private String saveDocument(MultipartFile document) {

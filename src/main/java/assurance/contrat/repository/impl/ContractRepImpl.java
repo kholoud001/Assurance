@@ -1,6 +1,7 @@
 package assurance.contrat.repository.impl;
 
 import assurance.contrat.model.entities.Contract;
+import assurance.contrat.model.entities.Insurance;
 import assurance.contrat.repository.ContractRep;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -31,6 +32,12 @@ public class ContractRepImpl implements ContractRep {
     public Contract findById(Long id) {
         return entityManager.find(Contract.class, id);
     }
+
+    @Override
+    public Insurance findInsuranceById(Long id) {
+        return entityManager.find(Insurance.class, id);
+    }
+
 
 
     @Override
