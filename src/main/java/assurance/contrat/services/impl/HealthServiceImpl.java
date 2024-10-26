@@ -25,6 +25,11 @@ public class HealthServiceImpl implements HealthService {
     }
 
     @Override
+    public Health findById(Long id){
+        return healthRep.findById(id);
+    }
+
+    @Override
     public List<Health> getHealthInsurancesForUser(Long userId) {
         return healthRep.findHealthByUserId(userId);
     }

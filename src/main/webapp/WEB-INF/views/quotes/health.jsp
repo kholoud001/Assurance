@@ -41,8 +41,9 @@
                             </form>
 
                             <!-- Generate Contract action button -->
-                            <form action="${pageContext.request.contextPath}/automobile/generateContract" method="post" style="display:inline;">
+                            <form action="${pageContext.request.contextPath}/contract/health" method="get" style="display:inline;">
                                 <input type="hidden" name="insuranceId" value="${insurance.id}" />
+                                <input type="hidden" name="insuranceType" value="Health" />
                                 <button type="submit" class="btn-generate">Generate Contract</button>
                             </form>
                         </td>

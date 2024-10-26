@@ -45,6 +45,7 @@
                             <!-- Show Contract form action button -->
                             <form action="${pageContext.request.contextPath}/contract/automobile" method="get" style="display:inline;">
                                 <input type="hidden" name="insuranceId" value="${insurance.id}" />
+                                <input type="hidden" name="insuranceType" value="Automobile" />
                                 <button type="submit" class="btn-generate">Generate Contract</button>
                             </form>
 

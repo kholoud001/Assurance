@@ -26,6 +26,12 @@ public class HealthRepImpl implements HealthRep {
     }
 
     @Override
+    public Health findById(Long id) {
+        return entityManager.find(Health.class, id);
+    }
+
+
+    @Override
     @Transactional
     public List<Health> findHealthByUserId(Long userId) {
         String jpql = "SELECT h FROM Health h WHERE h.user.id = :userId";
