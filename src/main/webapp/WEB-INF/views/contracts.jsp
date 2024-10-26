@@ -42,7 +42,9 @@
                 <td>
                     <div class="actions">
                         <a class="btn-generate" href="<c:url value='/contract/edit/${contract.id}'/>">Edit </a>
-                        <a class="btn-delete" href="<c:url value='/contract/delete/${contract.id}'/>" onclick="return confirm('Are you sure you want to delete this contract?');">Delete</a>
+                        <form action="<c:url value='/contract/delete/${contract.id}'/>" method="post" onsubmit="return confirm('Are you sure you want to delete this contract?');" style="display:inline;">
+                            <button type="submit" class="btn-delete">Delete</button>
+                        </form>
                     </div>
                 </td>
             </tr>

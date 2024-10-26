@@ -195,7 +195,7 @@ public class ContractController {
                 contract.setInsurance(insurance);
             } else {
                 redirectAttributes.addFlashAttribute("errorMessage", "Insurance not found.");
-                return "redirect:/contract/list"; 
+                return "redirect:/contract/list";
             }
         }
 
@@ -213,6 +213,24 @@ public class ContractController {
             redirectAttributes.addFlashAttribute("errorMessage", "Error updating contract: " + e.getMessage());
         }
 
+        return "redirect:/contract/list";
+    }
+
+
+    @PostMapping("/delete/{id}")
+    public String deleteContract(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+        try {
+            Contract contract = contractService.getContractById(id);
+            if (contract != null) {
+                contract.setStatus(false);
+                contractService.updateContractStatus(contract);
+                redirectAttributes.addFlashAttribute("successMessage", "Contract deleted successfully.");
+            } else {
+                redirectAttributes.addFlashAttribute("errorMessage", "Contract not found.");
+            }
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Error deleting contract: " + e.getMessage());
+        }
         return "redirect:/contract/list";
     }
 
