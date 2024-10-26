@@ -24,6 +24,13 @@ public class AutomobileRepImpl implements AutomobileRep {
         automobile.setUser(managedUser);
         entityManager.persist(automobile);
     }
+
+
+    @Override
+    public Automobile findById(Long id) {
+        return entityManager.find(Automobile.class, id);
+    }
+
     @Override
     @Transactional
     public List<Automobile> findAutomobileByUserId(Long userId) {

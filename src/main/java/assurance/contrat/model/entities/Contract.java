@@ -2,6 +2,7 @@ package assurance.contrat.model.entities;
 
 
 import jakarta.persistence.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
@@ -19,7 +20,10 @@ public class Contract {
     private LocalDate expirationDate;
 
     @Column(nullable = false)
-    private String document;
+    private String documentPath;
+
+    @Transient
+    private MultipartFile document;
 
     @Column(nullable = false)
     private boolean status;
@@ -58,13 +62,22 @@ public class Contract {
         this.expirationDate = expirationDate;
     }
 
-    public String getDocument() {
+    public String getDocumentPath() {
+        return documentPath;
+    }
+
+    public void setDocumentPath(String documentPath) {
+        this.documentPath = documentPath;
+    }
+
+    public MultipartFile getDocument() {
         return document;
     }
 
-    public void setDocument(String document) {
+    public void setDocument(MultipartFile document) {
         this.document = document;
     }
+
 
     public boolean isStatus() {
         return status;

@@ -19,6 +19,7 @@
             <table class="styled-table">
                 <thead>
                 <tr>
+<%--                    <th> Id</th>--%>
                     <th>Driver Age</th>
                     <th>Vehicle Use</th>
                     <th>Driving History</th>
@@ -29,6 +30,7 @@
                 <tbody>
                 <c:forEach var="insurance" items="${automobileInsurances}">
                     <tr>
+<%--                        <td><c:out value="${insurance.id}"/></td>--%>
                         <td><c:out value="${insurance.driverAge}"/></td>
                         <td><c:out value="${insurance.vehicleUse}"/></td>
                         <td><c:out value="${insurance.drivingHistory}"/></td>
@@ -40,11 +42,13 @@
                                 <button type="submit" class="btn-delete">Delete</button>
                             </form>
 
-                            <!-- Generate Contract action button -->
-                            <form action="${pageContext.request.contextPath}/automobile/generateContract" method="post" style="display:inline;">
+                            <!-- Show Contract form action button -->
+                            <form action="${pageContext.request.contextPath}/contract/automobile" method="get" style="display:inline;">
                                 <input type="hidden" name="insuranceId" value="${insurance.id}" />
                                 <button type="submit" class="btn-generate">Generate Contract</button>
                             </form>
+
+
                         </td>
                     </tr>
                 </c:forEach>
