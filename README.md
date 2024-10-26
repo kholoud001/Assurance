@@ -27,10 +27,9 @@ Dans cette compagnie d'assurance fictive, en tant que développeur, vous avez é
 
 ## Technologies Utilisées
 
-- **Frontend** : HTML, CSS, JavaScript, React (par exemple)
-- **Backend** : Node.js, Express.js (par exemple)
-- **Base de Données** : MySQL, MongoDB (au choix en fonction des besoins)
-- **Authentification** : JWT (JSON Web Token) ou autre méthode sécurisée
+- **Frontend** : HTML, CSS
+- **Backend** : Spring MVC
+- **Base de Données** : Postgres
 
 ## Installation
 
